@@ -1,8 +1,11 @@
 ## Template project with Slim-php
-* `vendor = 784 kb`
+* `php vendor = 784 kb`
 * `all - 1.5 mb`
+* Slim Tutorial - https://www.youtube.com/watch?v=b25xUNq_UOk
 
-Tutorial - https://www.youtube.com/watch?v=b25xUNq_UOk
+Also it is Vue as variant of frontend
+---
+
 
 ### Quick Start
 ###### index.php
