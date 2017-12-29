@@ -1,0 +1,9 @@
+body{
+  min-height: 1000px;
+  background-image: -webkit-linear-gradient(45deg, #93278f, #00a99d);
+  background-image: linear-gradient(45deg, #93278f, #00a99d);
+}
+
+
+@import '../assets/booter.scss';
+@import url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
