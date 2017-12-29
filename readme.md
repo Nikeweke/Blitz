@@ -4,7 +4,7 @@
 
 Tutorial - https://www.youtube.com/watch?v=b25xUNq_UOk
 
-#### Quick Start
+### Quick Start
 ###### index.php
 ```php
 <?php
@@ -36,7 +36,7 @@ RewriteRule ^(.*)$ index.php?/$1 [L]
 ```
 
 
-#### Autoload of namespaces
+### Autoload of namespaces
 ###### composer.json
 **App** - это пространство которому будет соответствовать папка `app`, и будет подгружать запрошенные классы автоматом без `spl_autoload_register`
 ```json
@@ -85,5 +85,5 @@ $ctrl = new \App\Controllers\HomeController();
 ```
 
 
-#### CORS solve troubles if use frontend
+### CORS solve troubles if use frontend
 It can be solved with **CORS Everywhere** in firefox, and similar adds in other browsers
