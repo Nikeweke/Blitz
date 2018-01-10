@@ -23,7 +23,7 @@ class HomeController extends Controller {
    public function Index($request, $response){
 
      $userModel = new User;
-     $users = $userModel->get($this->db);
+     $users     = $userModel->get($this->db);
 
      // dd($users);
 

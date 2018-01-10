@@ -3,7 +3,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-require 'vendor/autoload.php';     // подгрузка пакетов
+require  'vendor/autoload.php';     // подгрузка пакетов
 include  'settings/database.php';  // БД данные
 include  'settings/helpers.php';   // Воспомогательные функции
 
