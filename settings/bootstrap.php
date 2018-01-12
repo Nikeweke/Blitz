@@ -19,7 +19,7 @@ $app = new \Slim\App(['settings' => $config]);
 $container = $app->getContainer();
 
 // Устанавливаем подключение
-if($db['host']){
+if(isset($db['host'])){
   $container['db'] = function($c){
        $db = $c['settings']['db'];
        $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],  $db['user'], $db['pass']);

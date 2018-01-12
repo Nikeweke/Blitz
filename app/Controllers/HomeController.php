@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 // Models
-use App\Models\User;
+// use App\Models\User;
 
 class HomeController extends Controller {
 
@@ -11,7 +11,7 @@ class HomeController extends Controller {
    private $db;
 
    public function __construct($container){
-     $this->db = $container->db;   // set db connection into class field
+     // $this->db = $container->db;   // set db connection into class field
    }
 
 
@@ -22,10 +22,14 @@ class HomeController extends Controller {
    */
    public function Index($request, $response){
 
-     $userModel = new User;
-     $users     = $userModel->get($this->db);
+     // $userModel = new User;
+     // $users     = $userModel->get($this->db);
 
      // dd($users);
+
+     $users = [
+
+     ];
 
      include 'views/welcome.php';
    }
