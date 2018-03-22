@@ -10,8 +10,8 @@ class HomeController extends Controller {
 
    private $db;
 
-   public function __construct($container){
-     // $this->db = $container->db;   // set db connection into class field
+   public function __construct($db){
+     // $this->db = $db;   // set db connection into class field
    }
 
 
@@ -20,18 +20,11 @@ class HomeController extends Controller {
    |  Главная страница {GET}   /
    |--------------------------------------------------------------------------
    */
-   public function Index($request, $response){
-
-     // $userModel = new User;
-     // $users     = $userModel->get($this->db);
-
-     // dd($users);
-
-     $users = [
-
-     ];
-
+   public function Index($request, $response, $args){
      include 'views/welcome.php';
    }
+
+
+  
 
 }

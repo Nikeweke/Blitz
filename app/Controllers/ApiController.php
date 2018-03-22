@@ -23,4 +23,15 @@ class ApiController extends Controller {
      echo json_encode($data);
    }
 
+
+
+   /*
+   |--------------------------------------------------------------------------
+   |  Получить параметр {GET}   /test/{id}
+   |--------------------------------------------------------------------------
+   */
+   public function TestParams($request, $response, $args){
+     return json_encode($args);
+   }
+
 }
