@@ -6,57 +6,66 @@
 */
 namespace App\Controllers;
 
-use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\{ ObjectType, Type };
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
 
+use App\Controllers\Graphql\types\BookType;
+
+// mutation
+use App\Controllers\Graphql\{Mutation, TestData};
+
+// fields
+use App\Controllers\Graphql\fields\{SayField, BookField, BooksField, AuthorField};
+
 class GraphQLController extends Controller {
 
-    public function EntryPoint($request, $response, $args){
+    public function EntryPoint ($request, $response, $args) {
+
+
       try {
           // defining our ObjectType
-          $queryType = new ObjectType([
+          $rootQuery = new ObjectType([
+              'name' => 'rootQuery',
+              'fields' => function(){
+                return [
+                  'say'    => SayField::get(),
 
-              'name' => 'Query',
+                  'book'   => [
+                          'type' => BookType::get(),
 
-              'fields' => [
-                  'echo' => [
-                      'type' => Type::string(),
-                      'args' => [
-                          'message' => ['type' => Type::string()],
-                      ],
-                      'resolve' => function ($root, $args) {
-                          return  $root['prefix'] . $args['message'];
-                      }
+                          'args' => [
+                              'id' => ['type' => Type::int()],
+                          ],
+
+                          'resolve' => function ($root, $args) {
+                              $books = TestData::get('books');
+                              $arrIds = array_column($books, 'id');         // get from all items ID and make new array of its IDs
+                              $index = array_search($args['id'], $arrIds);  // get index of item in array
+                              return $books[$index];
+                          }
                   ],
-              ],
-          ]);
 
+                  'books'  => [
+                          'type' => Type::listOf( BookType::get() ),
+
+                          'resolve' => function ($root, $args) {
+                              $books = TestData::get('books');
+                              return $books[$index];
+                          }
+                  ],
+               ];
+              }
+          ]);
 
           // defining mutation (function)
-          $mutationType = new ObjectType([
-              'name' => 'Calc',
-              'fields' => [
-                  'sum' => [
-                      'type' => Type::int(),
-                      'args' => [
-                          'x' => ['type' => Type::int()],
-                          'y' => ['type' => Type::int()],
-                      ],
-                      'resolve' => function ($root, $args) {
-                          return $args['x'] + $args['y'];
-                      },
-                  ],
-              ],
-          ]);
-
+          $mutation = new ObjectType( Mutation::get() );
 
           // See docs on schema options:
           // http://webonyx.github.io/graphql-php/type-system/schema/#configuration-options
           $schema = new Schema([
-              'query' => $queryType,
-              'mutation' => $mutationType,
+              'query'    => $rootQuery,
+              'mutation' => $mutation,
           ]);
 
           // get data  (example):
@@ -71,7 +80,7 @@ class GraphQLController extends Controller {
           $query = $body['query'];
           $variableValues = isset($body['variables']) ? $body['variables'] : null;
 
-          $rootValue = ['prefix' => 'You said: '];
+          $rootValue = ['prefix' => 'You said: ']; // it is using in fields/Say.php
 
           $result = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues);
           $output = $result->toArray();

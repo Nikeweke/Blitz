@@ -9,6 +9,10 @@ namespace App\Models;
 
 class User extends BaseModel {
 
+     public static function test(){
+        echo 'sss';
+     }
+
      /*
      |--------------------------------------------------------------------------
      |  Забрать всех пользователей
