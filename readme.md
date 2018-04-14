@@ -1,13 +1,12 @@
 ## Template project with Slim-php
-* `php vendor = 784 kb`
-* `all - 1.5 mb`
+* Benefit is small size
 * Slim Tutorial - https://www.youtube.com/watch?v=b25xUNq_UOk
-* Also it is `Vue` as variant of frontend
+* GraphQL is also here. A small example in `GraphQLController.php`
 
 ---
 
 
-### Quick Start
+### Quick Start with Slim
 ###### index.php
 ```php
 <?php
@@ -20,7 +19,6 @@ $app = new \Slim\App;
 $app->get('/', function(Request $request, Response $response){
   echo "hello";
 });
-
 
 $app->run();
 ```

@@ -7,7 +7,6 @@ namespace App\Controllers;
 
 class HomeController extends Controller {
 
-
    private $db;
 
    public function __construct($db){
