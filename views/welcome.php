@@ -15,12 +15,16 @@
 
    <ul>
 
-     <?php foreach ($users as $key => $user) { ?>
+      <?php if(! empty($users)):
+             foreach ($users as $key => $user) { ?>
 
            <li>Email: <?= $user['email'] ?> </li>
 
-    <?php } ?>
+        <?php } ?>
 
+      <?php else: ?>
+           No users provided
+      <?php endif; ?>
    </ul>
 
 

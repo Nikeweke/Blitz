@@ -7,9 +7,11 @@
 
 use \App\Controllers\{
                        HomeController as HomeCtrl,
-                       ApiController  as ApiCtrl
+                       ApiController  as ApiCtrl,
+                       GraphQLController as GraphQLCtrl
                     };
 
 // $c - содержит подключение к БД
 $container['HomeController'] =  new HomeCtrl($DB);  // pass DB - HomeCtrl($DB)
 $container['ApiController']  =  new ApiCtrl();
+$container['GraphQLController']  =  new GraphQLCtrl();

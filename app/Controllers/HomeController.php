@@ -21,10 +21,13 @@ class HomeController extends Controller {
    |--------------------------------------------------------------------------
    */
    public function Index($request, $response, $args){
+
+     $users = [];
+
      include 'views/welcome.php';
    }
 
 
-  
+
 
 }
