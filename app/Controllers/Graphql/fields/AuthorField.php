@@ -3,21 +3,26 @@
 namespace App\Controllers\Graphql\fields;
 
 use GraphQL\Type\Definition\Type;
-use App\Controllers\Graphql\types\AuthorType;
 use App\Controllers\Graphql\TestData;
+use App\Controllers\Graphql\types\TypesRegistry;  // custom types
 
 class AuthorField {
 
+  /*
+  |----------------------------------------------------------
+  | Get just a Author by ID + His books
+  |----------------------------------------------------------
+  */
   public static function get () {
 
     // get test data as some of authors
     $authors = TestData::get('authors');
 
     return [
-            'type' => AuthorType::get(),
+            'type' => TypesRegistry::AuthorType(),
 
             'args' => [
-                'id' => ['type' => Type::int()],
+                'id' => [ 'type' => Type::int() ],
             ],
 
             'resolve' => function ($root, $args) use ($authors) {

@@ -6,6 +6,11 @@ use GraphQL\Type\Definition\Type;
 
 class SayField {
 
+  /*
+  |----------------------------------------------------------
+  | Return your message 
+  |----------------------------------------------------------
+  */
   public static function get () {
     return [
             'type' => Type::string(),

@@ -3,21 +3,26 @@
 namespace App\Controllers\Graphql\fields;
 
 use GraphQL\Type\Definition\Type;
-use App\Controllers\Graphql\types\BookType;
 use App\Controllers\Graphql\TestData;
+use App\Controllers\Graphql\types\TypesRegistry;  // custom types
 
 class BookField {
 
+  /*
+  |----------------------------------------------------------
+  | Get just a Book by ID + Author
+  |----------------------------------------------------------
+  */
   public static function get () {
 
     // get test data as some of books
     $books = TestData::get('books');
 
     return [
-            'type' => BookType::get(),
+            'type' => TypesRegistry::BookType(),
 
             'args' => [
-                'id' => ['type' => Type::int()],
+                'id' => [ 'type' => Type::int() ],
             ],
 
             'resolve' => function ($root, $args) use ($books) {
@@ -29,17 +34,22 @@ class BookField {
   }
 
 
+
+  /*
+  |----------------------------------------------------------
+  | Get list of Books
+  |----------------------------------------------------------
+  */
   public static function getList () {
 
     // get test data as some of books
     $books = TestData::get('books');
 
     return [
-
-            'type' => Type::listOf( new BookType() ),
+            'type' => Type::listOf( TypesRegistry::BookType() ),
 
             'resolve' => function ($root, $args) use ($books) {
-                return $books[$index];
+                return $books;
             }
     ];
   }

@@ -1,5 +1,9 @@
 <?php
-
+/*
+*   Mutation.php
+*
+*   contains a functions(mutations) for graphQl
+*/
 namespace App\Controllers\Graphql;
 
 use GraphQL\Type\Definition\Type;
@@ -8,8 +12,11 @@ class Mutation {
 
   public static function get () {
     return [
-        'name' => 'Calc',
+        'name' => 'Mutation',
+
         'fields' => [
+
+            // example of call: mutation { sum(x: 2, y: 2) }
             'sum' => [
                 'type' => Type::int(),
                 'args' => [
@@ -20,6 +27,8 @@ class Mutation {
                     return $args['x'] + $args['y'];
                 },
             ],
+
+            
         ],
     ];
   }

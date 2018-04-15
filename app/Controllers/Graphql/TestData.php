@@ -1,10 +1,19 @@
 <?php
-
+/*
+*   TestData.php
+*
+*   contains a test data
+*/
 namespace App\Controllers\Graphql;
 
 class TestData {
 
-  public static function get (string $data_name) : array {
+  /*
+  |----------------------------------------------------------
+  | Передаем название массива который хотим получить отсюда
+  |----------------------------------------------------------
+  */
+  public static function get (string $arr_name) : array {
     $books = [
       ['id' => 1, 'title' => 'Nigthmare',      'genre' => 'Horror',    'author_id' => 1 ],
       ['id' => 2, 'title' => 'Human on Earth', 'genre' => 'Fantastic', 'author_id' => 1 ],
@@ -18,7 +27,7 @@ class TestData {
     ];
 
     // will return array by name thats above
-    return $$data_name;
+    return $$arr_name;
   }
 
 }

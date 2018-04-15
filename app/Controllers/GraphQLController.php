@@ -9,53 +9,28 @@ namespace App\Controllers;
 use GraphQL\Type\Definition\{ ObjectType, Type };
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
-
-use App\Controllers\Graphql\types\BookType;
-
-// mutation
-use App\Controllers\Graphql\{Mutation, TestData};
-
-// fields
-use App\Controllers\Graphql\fields\{SayField, BookField, BooksField, AuthorField};
+use App\Controllers\Graphql\{Mutation, TestData};                         // mutation, test data
+use App\Controllers\Graphql\fields\{ SayField, BookField, AuthorField }; // fields
 
 class GraphQLController extends Controller {
 
+    /*
+    |----------------------------------------------------------
+    | Входная точка для GraphQL обращений
+    |----------------------------------------------------------
+    */
     public function EntryPoint ($request, $response, $args) {
 
-
       try {
-          // defining our ObjectType
+          // defining our ObjectType with fields that we can request to
           $rootQuery = new ObjectType([
               'name' => 'rootQuery',
-              'fields' => function(){
-                return [
+              'fields' =>  [
                   'say'    => SayField::get(),
-
-                  'book'   => [
-                          'type' => BookType::get(),
-
-                          'args' => [
-                              'id' => ['type' => Type::int()],
-                          ],
-
-                          'resolve' => function ($root, $args) {
-                              $books = TestData::get('books');
-                              $arrIds = array_column($books, 'id');         // get from all items ID and make new array of its IDs
-                              $index = array_search($args['id'], $arrIds);  // get index of item in array
-                              return $books[$index];
-                          }
-                  ],
-
-                  'books'  => [
-                          'type' => Type::listOf( BookType::get() ),
-
-                          'resolve' => function ($root, $args) {
-                              $books = TestData::get('books');
-                              return $books[$index];
-                          }
-                  ],
-               ];
-              }
+                  'book'   => BookField::get(),
+                  'books'  => BookField::getList(),
+                  'author' => AuthorField::get()
+               ]
           ]);
 
           // defining mutation (function)

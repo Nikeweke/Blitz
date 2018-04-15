@@ -3,16 +3,14 @@
 namespace App\Controllers\Graphql\types;
 
 use GraphQL\Type\Definition\{ ObjectType, Type };
-use App\Controllers\Graphql\types\AuthorType;
 use App\Controllers\Graphql\TestData;
+use App\Controllers\Graphql\types\TypesRegistry;  // custom types
 
-class BookType {
+class BookType extends ObjectType {
 
-  public static function get (): ObjectType {
+  public function __construct () {
 
-    $authors = TestData::get('authors');
-
-    return new ObjectType([
+    $config = [
         'name' => 'Book',
         'description' => 'Book type and thats all',
         'fields' => [
@@ -21,16 +19,23 @@ class BookType {
             'genre'     => Type::string(),
             'author_id' => Type::int(),
 
-            'author'    => [
-               'type'    => AuthorType::get(),
 
-               'resolve' => function($root, $args) use ($authors) {
-                 $arrIds = array_column($authors, 'id');         // get from all items ID and make new array of its IDs
-                 $index = array_search($root['author_id'], $arrIds);  // get index of item in array
-                 return $authors[$index];
-               }
-            ],
+              // CANT ENABLE THIS FIELD CUZ OF MEMORY EXHAUSTED, not resolved YET  !!!!!!!
+
+            // 'author'    => [
+            //    'type'    => TypesRegistry::AuthorType(),
+            //
+            //    'resolve' => function($root, $args) {
+            //      $authors = TestData::get('authors');
+            //      $arrIds = array_column($authors, 'id');         // get from all items ID and make new array of its IDs
+            //      $index = array_search($root['author_id'], $arrIds);  // get index of item in array
+            //      return $authors[$index];
+            //    }
+            // ],
         ]
-    ]);
+    ];
+
+    parent::__construct($config);
   }
+
 }
