@@ -3,6 +3,14 @@
 * Slim Tutorial - https://www.youtube.com/watch?v=b25xUNq_UOk
 * GraphQL is also here. A small example in `GraphQLController.php`
 
+```mermaid
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
+
 ---
 
 
