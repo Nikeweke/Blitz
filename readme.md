@@ -4,11 +4,11 @@
 * GraphQL is also here. A small example in `GraphQLController.php`
 
 ```mermaid
-graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
+graph TD
+  A-->B
+  A-->C
+  B-->D
+  C-->D
 ```
 
 ---
